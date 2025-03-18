@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ note.title }}</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+    <a href="/">Back to Home</a>
+
+    <h1>{{ note.title }}</h1>
+    <p>{{ note.body }}</p>
+    <p><small>Time: {{ note.time.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in note.comments %}
+            <li>{{ comment.body }} - <small>{{ comment.time.strftime('%Y-%m-%d %H:%M:%S') }}</small></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a Comment</h3>
+    <button id="toggle-comment-form">Toggle Comment Form</button>
+
+    <form id="comment-form" method="POST" action="/comment/{{ note.id }}" style="display:none;">
+        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
+
+    <form method="POST" action="/delete/{{ note.id }}">
+        <button type="submit">Delete Note</button>
+    </form>
+
+    <script src="/static/js/toggle.js"></script>
+
+</body>
+</html>
