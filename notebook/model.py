@@ -35,15 +35,15 @@ class Note(db.Model):
     
     @classmethod
     def search(cls, term):
-        return cls.query.join(Comment, Comment.parent_note_id == cls.id).filter(
-            (cls.title.ilike(f'%{term}%')) |
-            (cls.body.ilike(f'%{term}%')) |
-            (Comment.body.ilike(f'%{term}%'))
-        ).distinct()
+        return cls.query.join(Comment, Comment.parent_note_id == cls.id).filter(  # join notes and comments table
+            (cls.title.ilike(f'%{term}%')) |  # check title
+            (cls.body.ilike(f'%{term}%')) |  # check body
+            (Comment.body.ilike(f'%{term}%'))  # check comment
+        ).distinct()  # return distinct matching notes
 
     def delete(self):
         try:
-            for comment in self.comments:
+            for comment in self.comments:  # must delete comments which map to note before deleting note
                 db.session.delete(comment)
             db.session.delete(self)
             db.session.commit()

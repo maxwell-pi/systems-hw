@@ -12,12 +12,12 @@
 
     <h1>{{ note.title }}</h1>
     <p>{{ note.body }}</p>
-    <p><small>Time: {{ note.time.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+    <p><small>Time: {{ note.time.strftime('%m-%d %H:%M') }}</small></p>
 
     <h2>Comments</h2>
     <ul>
         {% for comment in note.comments %}
-            <li>{{ comment.body }} - <small>{{ comment.time.strftime('%Y-%m-%d %H:%M:%S') }}</small></li>
+            <li>{{ comment.body }} - <small>{{ comment.time.strftime('%m-%d %H:%M') }}</small></li>
         {% endfor %}
     </ul>
 

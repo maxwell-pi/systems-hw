@@ -9,4 +9,4 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-from notebook import routes
+from notebook import routes  # just to register routes
