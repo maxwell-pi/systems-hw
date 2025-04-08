@@ -3,7 +3,7 @@
 
 ## How to Run
 
-Create a virtual environment from `requirements.py`, and then execute `run.py`.
+The docker image may be build with command `docker build -t a3 .` executed at the project top-level directory. Then, build the container with `docker run -p 5001:5000 -v $(pwd)/instance:/app/instance a3`. Visit the running service at http://127.0.0.1:5001/. (I used port 5001, as I had conflicts on my Mac using port 5000.) Database information persists outside of the container due to the linking of the local database and the container database resource.
 
 ## Code Notes
 
